@@ -5,7 +5,8 @@ function SearchPage() {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     const newKeyword = e.target.elements.searchBar.value;
-    window.location.href = `/result/${newKeyword}`;
+    if (!newKeyword) alert("검색어를 입력하세요.");
+    else window.location.href = `/result/${newKeyword}`;
   };
 
   return (
