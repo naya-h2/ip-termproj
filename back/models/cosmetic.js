@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cosmeticSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
+    searchName: { type: String },
     price: { type: Number, required: true },
     place: {
       type: String,

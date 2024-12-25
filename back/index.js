@@ -3,6 +3,7 @@ const app = express();
 const port = 8000;
 require("dotenv").config(); //dotenv 초기화
 
+const cors = require("cors");
 const mongoose = require("mongoose");
 const Cosmetic = require("./models/cosmetic");
 
@@ -11,7 +12,12 @@ mongoose
   .then(() => console.log("db 연결이 완료되었습니다."))
   .catch(() => console.log("db 연결에 실패하였습니다."));
 
+const corsOptions = {
+  origin: "http://localhost:3000",
+};
+
 app.use(express.json());
+app.use(cors(corsOptions));
 
 app.get("/search/:keyword/all", async (req, res) => {
   try {
@@ -32,13 +38,12 @@ app.get("/search/:keyword", async (req, res) => {
     const startDate = new Date(); //하루 전으로 설정
     startDate.setDate(startDate.getDate() - 1);
     startDate.setHours(0, 0, 0, 0);
-
     const endDate = new Date();
 
-    // console.log(startDate, endDate);
+    const regex = new RegExp(req.params.keyword, "i");
 
     const searchedData = await Cosmetic.find({
-      name: req.params.keyword,
+      searchName: { $regex: regex },
       createdAt: {
         $gte: startDate,
         $lte: endDate,
@@ -69,16 +74,21 @@ app.get("/cosmetic", async (req, res) => {
 //data 생성
 app.post("/cosmetic", async (req, res) => {
   try {
-    const today = new Date();
+    const start = new Date();
+    start.setHours(0, 0, 0, 0);
+    const end = new Date();
+    end.setHours(23, 59, 59, 999);
+
     const already = await Cosmetic.find({
       name: req.body.name,
       price: req.body.price,
-      createdAt: today,
+      createdAt: { $gte: start, $lte: end },
     });
-    if (already) throw Error("이미 동일한 데이터가 존재합니다.");
+    if (already.length > 0) throw Error("이미 동일한 데이터가 존재합니다.");
 
     const newCosmetic = new Cosmetic({
       name: req.body.name,
+      searchName: req.body.name.replace(/\s+/g, ""),
       price: req.body.price,
       place: req.body.place,
       url: req.body.url,

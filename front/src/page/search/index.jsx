@@ -2,6 +2,12 @@ import logo from "../../asset/logo.svg";
 import SearchBar from "../../components/SearchBar";
 
 function SearchPage() {
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    const newKeyword = e.target.elements.searchBar.value;
+    window.location.href = `/result/${newKeyword}`;
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-col items-center pt-[128px] pb-6 gap-1">
@@ -10,7 +16,10 @@ function SearchPage() {
           화장품 이름을 검색하여 가격을 비교해 보세요.
         </p>
       </div>
-      <form className="w-full flex flex-col items-center">
+      <form
+        className="w-full flex flex-col items-center"
+        onSubmit={handleSearchSubmit}
+      >
         <SearchBar />
         <button className="w-[134px] my-24">검색하기</button>
       </form>

@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import Card from "../../components/Card";
 import SearchBar from "../../components/SearchBar";
-import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const DATA = [
   {
@@ -27,6 +28,13 @@ const DATA = [
 
 function ResultPage() {
   const { keyword } = useParams();
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ["result", keyword],
+    queryFn: async () => {
+      const res = await axios.get(`http://localhost:8000/search/${keyword}`);
+      return res.data;
+    },
+  });
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -48,9 +56,10 @@ function ResultPage() {
         <p className="text-gray-500 text-12 mb-1">
           가격 순으로 정렬한 검색 결과입니다.
         </p>
-        {DATA.length > 0 ? (
+        {isLoading && <p>로딩중 ...</p>}
+        {isSuccess && data.length > 0 ? (
           <div className="flex flex-col gap-2">
-            {DATA.map((item, idx) => (
+            {data.map((item, idx) => (
               <Card
                 key={item._id}
                 name={item.name}
@@ -64,7 +73,15 @@ function ResultPage() {
             ))}
           </div>
         ) : (
-          <div>데이터가 존재하지 않아요.</div>
+          <div className="flex flex-col gap-6 items-center my-16">
+            <div>데이터가 존재하지 않아요 😥</div>
+            <a
+              href="/post"
+              className="text-14 border-b text-pink-main border-b-pink-main"
+            >
+              데이터 추가하러 가기
+            </a>
+          </div>
         )}
       </main>
     </>
