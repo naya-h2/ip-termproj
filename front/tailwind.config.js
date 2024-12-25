@@ -17,7 +17,7 @@ module.exports = {
           bg: "#FFEDED",
         },
         white: {
-          default: "FDFDFD",
+          DEFAULT: "#FDFDFD",
         },
       },
     },

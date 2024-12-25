@@ -17,7 +17,7 @@ app.get("/search/:keyword/all", async (req, res) => {
   try {
     const searchedData = await Cosmetic.find({
       name: req.params.keyword,
-    });
+    }).sort({ price: 1 });
     res.status(200).json(searchedData);
   } catch (err) {
     res.status(500).json({
@@ -43,7 +43,7 @@ app.get("/search/:keyword", async (req, res) => {
         $gte: startDate,
         $lte: endDate,
       },
-    });
+    }).sort({ price: 1 });
     res.status(200).json(searchedData);
   } catch (err) {
     res.status(500).json({
