@@ -3,28 +3,7 @@ import Card from "../../components/Card";
 import SearchBar from "../../components/SearchBar";
 import { useQuery } from "@tanstack/react-query";
 import { instance } from "../../axios";
-
-const DATA = [
-  {
-    _id: "676c11a945853c22399ea175",
-    name: "쥬시래스팅틴트",
-    price: 4800,
-    place: "올리브영",
-    createdAt: "2024-12-25T14:07:37.144Z",
-    updatedAt: "2024-12-25T14:07:37.144Z",
-    __v: 0,
-  },
-  {
-    _id: "676c1dbc45853c22399ea17a",
-    name: "쥬시래스팅틴트",
-    price: 9800,
-    place: "올리브영",
-    createdAt: "2024-12-25T14:59:08.478Z",
-    updatedAt: "2024-12-25T14:59:08.478Z",
-    url: "/",
-    __v: 0,
-  },
-];
+import { Helmet } from "react-helmet-async";
 
 function ResultPage() {
   const { keyword } = useParams();
@@ -45,6 +24,9 @@ function ResultPage() {
 
   return (
     <>
+      <Helmet>
+        <title>검색 결과: {keyword}</title>
+      </Helmet>
       <form
         className="flex flex-col gap-1 my-6 text-[#3d3d3d]"
         onSubmit={handleSearchSubmit}
@@ -59,7 +41,7 @@ function ResultPage() {
         </p>
         {isLoading && <p>로딩중 ...</p>}
         {isSuccess && data.length > 0 ? (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 items-center">
             {data.map((item, idx) => (
               <Card
                 key={item._id}
@@ -72,6 +54,12 @@ function ResultPage() {
                 link={item.url}
               />
             ))}
+            <a
+              href="/post"
+              className="text-14 border-b text-pink-main border-b-pink-main text-center w-fit mt-6"
+            >
+              원하는 데이터가 없다면 직접 추가해 보세요.
+            </a>
           </div>
         ) : (
           <div className="flex flex-col gap-6 items-center my-16">

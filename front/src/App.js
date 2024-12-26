@@ -6,7 +6,7 @@ import PostPage from "./page/post";
 function App() {
   return (
     <Routes>
-      <Route path="/search" element={<SearchPage />} />
+      <Route path="/" element={<SearchPage />} />
       <Route path="/result/:keyword" element={<ResultPage />} />
       <Route path="/post" element={<PostPage />} />
     </Routes>
