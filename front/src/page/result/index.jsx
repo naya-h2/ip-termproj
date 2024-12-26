@@ -35,7 +35,7 @@ function ResultPage() {
         <SearchBar defaultValue={keyword} />
         <p className="text-end text-[#3d3d3d]">의 최저가를 찾아드릴게요.</p>
       </form>
-      <main>
+      <main className="mb-32">
         <p className="text-gray-500 text-12 mb-1">
           가격 순으로 정렬한 검색 결과입니다.
         </p>
@@ -73,6 +73,12 @@ function ResultPage() {
           </div>
         )}
       </main>
+      <button
+        className="fixedButton"
+        onClick={() => (window.location.href = `/trace/${keyword}`)}
+      >
+        최저가 추적하기
+      </button>
     </>
   );
 }

@@ -2,15 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import Input from "../../components/Input";
 import { instance } from "../../axios";
 import { Helmet } from "react-helmet-async";
-
-const PLACE_LIST = [
-  "공식 홈페이지",
-  "쿠팡",
-  "올리브영",
-  "무신사 뷰티",
-  "지그재그",
-  "에이블리",
-];
+import { PLACE_LIST } from "../../constants";
 
 function PostPage() {
   const [cnt, setCnt] = useState([1]);

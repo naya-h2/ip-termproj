@@ -38,3 +38,15 @@ button {
   outline: none;
   box-shadow: 0 1px 6px 0 #20212447;
 }
+
+.fixedButton {
+  /* width: calc(100vw - 40px); */
+  position: fixed;
+  bottom: 48px;
+  right: 20px;
+  left: 20px;
+}
+
+.hiddenScroll::-webkit-scrollbar {
+  display: none;
+}
