@@ -8,12 +8,16 @@ by 20211550 안희원
 - 개발 IDE: `vscode`
 - node.js: `v22.11.0`
 
+<br>
+
 <b>Backend 관련</b>
 
 - Express.js: `v4.21.2`
 - mongoose: `v8.9.2`
 
 이외에 Backend 개발에 사용한 dotenv, cors 라이브러리 버전은 `/back/package.json` 확인 부탁드립니다.
+
+<br>
 
 <b>Frontend 관련</b>
 
@@ -23,9 +27,14 @@ by 20211550 안희원
 
 이외에 Frontend 개발에 사용한 라이브러리들 버전은 `/front/package.json - dependencies 및 devDependencies` 확인 부탁드립니다.
 
+<br>
+<br>
+
 ## 6. 실행 방법 (로컬)
 
 `6. 구동 url` 관련 설명입니다.
+
+<br>
 
 ### 💄 Backend 서버 실행
 
@@ -58,6 +67,7 @@ http://localhost:8000/cosmetic
 ```
 
 <BR>
+<br>
 
 ### 💄 Frontend 서버 실행
 
