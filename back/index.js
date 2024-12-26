@@ -19,10 +19,25 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
-app.get("/search/:keyword/all", async (req, res) => {
+//한 달 간 브랜드 별 데이터 검색
+app.get("/search/:keyword/:place", async (req, res) => {
   try {
+    const today = new Date();
+    const startDate = new Date(
+      today.getFullYear(),
+      today.getMonth() - 1,
+      today.getDate()
+    );
+    const normalizedKeyword = req.params.keyword.replace(/\s+/g, "");
+    const regex = new RegExp(normalizedKeyword, "i");
+
     const searchedData = await Cosmetic.find({
-      name: req.params.keyword,
+      searchName: { $regex: regex },
+      createdAt: {
+        $gte: startDate,
+        $lte: today,
+      },
+      place: req.params.place,
     }).sort({ price: 1 });
     res.status(200).json(searchedData);
   } catch (err) {
@@ -33,6 +48,7 @@ app.get("/search/:keyword/all", async (req, res) => {
   }
 });
 
+//name으로 검색
 app.get("/search/:keyword", async (req, res) => {
   try {
     const startDate = new Date(); //하루 전으로 설정
