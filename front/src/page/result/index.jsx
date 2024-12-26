@@ -4,6 +4,7 @@ import SearchBar from "../../components/SearchBar";
 import { useQuery } from "@tanstack/react-query";
 import { instance } from "../../axios";
 import { Helmet } from "react-helmet-async";
+import Header from "../../components/Header";
 
 function ResultPage() {
   const { keyword } = useParams();
@@ -27,8 +28,9 @@ function ResultPage() {
       <Helmet>
         <title>검색 결과: {keyword}</title>
       </Helmet>
+      <Header />
       <form
-        className="flex flex-col gap-1 my-6 text-[#3d3d3d]"
+        className="flex flex-col gap-1 mt-[60px] my-6 text-[#3d3d3d]"
         onSubmit={handleSearchSubmit}
       >
         검색하신
