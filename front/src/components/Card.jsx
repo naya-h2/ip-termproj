@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
 
 function Card({ name, place, price, isMin, createdAt, imgUrl, link }) {
+  console.log(createdAt);
+
   return (
     <div
       className={`rounded-lg px-4 py-3 bg-white/75 flex gap-2 cursor-pointer hover:bg-white/30 ${

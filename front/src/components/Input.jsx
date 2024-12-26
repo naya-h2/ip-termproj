@@ -7,7 +7,7 @@ function Input({ label, placeholder, type, required = false }) {
         type={type || "text"}
         placeholder={placeholder}
         required={required}
-        className="font-normal w-full h-11 rounded-md border border-gray-200 focus:border-pink-main focus:outline-none p-3"
+        className="font-normal w-full h-11 rounded-md border border-gray-200 focus:border-pink-main focus:outline-none p-3 text-14"
       />
     </label>
   );

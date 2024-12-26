@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Card from "../../components/Card";
 import SearchBar from "../../components/SearchBar";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { instance } from "../../axios";
 
 const DATA = [
   {
@@ -31,7 +31,7 @@ function ResultPage() {
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ["result", keyword],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:8000/search/${keyword}`);
+      const res = await instance.get(`/search/${keyword}`);
       return res.data;
     },
   });
