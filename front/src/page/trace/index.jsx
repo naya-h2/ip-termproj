@@ -99,7 +99,7 @@ function TracePage() {
             key={item}
             onClick={() => setTab(item)}
             className={`text-nowrap py-2 px-3 bg-white rounded-full cursor-pointer border border-gray-200 hover:text-pink-main ${
-              tab === item && "bg-black text-white border-none"
+              tab === item && "!bg-black text-white border-none"
             }`}
           >
             {item}
