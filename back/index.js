@@ -38,7 +38,7 @@ app.get("/search/:keyword/:place", async (req, res) => {
         $lte: today,
       },
       place: req.params.place,
-    }).sort({ price: 1 });
+    }).sort({ createdAt: 1 });
     res.status(200).json(searchedData);
   } catch (err) {
     res.status(500).json({
