@@ -40,7 +40,8 @@ app.get("/search/:keyword", async (req, res) => {
     startDate.setHours(0, 0, 0, 0);
     const endDate = new Date();
 
-    const regex = new RegExp(req.params.keyword, "i");
+    const normalizedKeyword = req.params.keyword.replace(/\s+/g, "");
+    const regex = new RegExp(normalizedKeyword, "i");
 
     const searchedData = await Cosmetic.find({
       searchName: { $regex: regex },
@@ -81,6 +82,7 @@ app.post("/cosmetic", async (req, res) => {
 
     const already = await Cosmetic.find({
       name: req.body.name,
+      place: req.body.place,
       price: req.body.price,
       createdAt: { $gte: start, $lte: end },
     });
@@ -100,7 +102,7 @@ app.post("/cosmetic", async (req, res) => {
       data: newCosmetic,
     });
   } catch (err) {
-    res.json({
+    res.status(400).json({
       message: "생성에 실패하였습니다.",
       error: err.message,
     });
