@@ -3,6 +3,10 @@
 인터넷프로그래밍 및 응용(CSE4177) Term Project <Br>
 by 20211550 안희원
 
+- [프로젝트 PPT](https://drive.google.com/file/d/1hqcu8P3KpVvkmST7bFcIf-DQV4rszopp/view?usp=drive_link)
+- [프로젝트 발표 영상](https://youtu.be/c2PQvKeGjIg)
+- [프로젝트 데모 영상](https://youtu.be/8CANDr3SKKs)
+
 ## 5. 구동 환경
 
 - 개발 IDE: `vscode`
